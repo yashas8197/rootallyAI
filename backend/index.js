@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // MongoDB connection
 mongoose
