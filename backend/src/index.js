@@ -109,7 +109,12 @@ app.delete("/api/categories/:id", async (req, res) => {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    res.status(200).json({ message: "Category deleted successfully" });
+    res
+      .status(200)
+      .json({
+        message: "Category deleted successfully",
+        id: deletedCategory._id,
+      });
   } catch (error) {
     console.error("Error deleting category:", error);
     res.status(500).json({ message: "Failed to delete category", error });
