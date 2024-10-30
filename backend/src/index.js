@@ -145,6 +145,27 @@ app.post("/api/exercises/:id", async (req, res) => {
   }
 });
 
+const handleAdd = async (exerciseData) => {
+  try {
+    const newExercise = new Category(exerciseData);
+    await newExercise.save();
+    return newExercise;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+app.post("/api/exercises", async (req, res) => {
+  const exerciseData = req.body;
+
+  try {
+    const addedExercise = await handleAdd(exerciseData);
+    res.status(201).json(addedExercise);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
   // await seedData();
