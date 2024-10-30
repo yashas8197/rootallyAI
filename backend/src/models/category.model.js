@@ -1,18 +1,47 @@
 const mongoose = require("mongoose");
 
-const exerciseSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-});
+const categorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    sets: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+    reps: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+    holdTime: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    side: {
+      type: String,
+      enum: ["Left", "Right"],
+    },
+    dumbbell: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const subcategorySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  exercises: [exerciseSchema],
-});
+const Category = mongoose.model("Category", categorySchema);
 
-const categorySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  subcategories: [subcategorySchema],
-});
-
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = Category;
