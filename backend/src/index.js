@@ -84,6 +84,22 @@ app.get("/api/categories", async (req, res) => {
   }
 });
 
+app.post("/api/duplicate-category", async (req, res) => {
+  try {
+    const categoryData = req.body;
+
+    delete categoryData._id;
+
+    const duplicatedCategory = new Category(categoryData);
+    await duplicatedCategory.save();
+
+    res.status(201).json(duplicatedCategory);
+  } catch (error) {
+    console.error("Error duplicating category:", error);
+    res.status(500).json({ message: "Failed to duplicate category", error });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
   //   await seedData();
