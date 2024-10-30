@@ -1,42 +1,38 @@
-{
-  "categories": [
-    {
-      "name": "Strength",
-      "subcategories": [
-        {
-          "name": "Upper Body",
-          "exercises": [
-            { "name": "Bench Press", "description": "Chest exercise" },
-            { "name": "Pull Up", "description": "Back exercise" }
-          ]
-        },
-        {
-          "name": "Lower Body",
-          "exercises": [
-            { "name": "Squat", "description": "Leg exercise" },
-            { "name": "Deadlift", "description": "Full body exercise" }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Cardio",
-      "subcategories": [
-        {
-          "name": "Running",
-          "exercises": [
-            { "name": "Sprints", "description": "Short distance running" },
-            { "name": "Marathon", "description": "Long distance running" }
-          ]
-        },
-        {
-          "name": "Cycling",
-          "exercises": [
-            { "name": "Road Cycling", "description": "Outdoor cycling" },
-            { "name": "Stationary Bike", "description": "Indoor cycling" }
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "name": "Bench Press",
+    "description": "Chest exercise",
+    "sets": 10,
+    "reps": 10,
+    "holdTime": 10,
+    "side": "Left",
+    "dumbbell": 10
+  },
+  {
+    "name": "Pull Up",
+    "description": "Back exercise",
+    "sets": 8,
+    "reps": 12,
+    "holdTime": 5,
+    "side": "Right",
+    "dumbbell": 0
+  },
+  {
+    "name": "Squat",
+    "description": "Leg exercise",
+    "sets": 12,
+    "reps": 10,
+    "holdTime": 5,
+    "side": "Left",
+    "dumbbell": 20
+  },
+  {
+    "name": "Deadlift",
+    "description": "Full body exercise",
+    "sets": 10,
+    "reps": 8,
+    "holdTime": 0,
+    "side": "Right",
+    "dumbbell": 30
+  }
+]

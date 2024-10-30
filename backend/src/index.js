@@ -30,42 +30,40 @@ const seedData = async () => {
   const data = {
     categories: [
       {
-        name: "Strength",
-        subcategories: [
-          {
-            name: "Upper Body",
-            exercises: [
-              { name: "Bench Press", description: "Chest exercise" },
-              { name: "Pull Up", description: "Back exercise" },
-            ],
-          },
-          {
-            name: "Lower Body",
-            exercises: [
-              { name: "Squat", description: "Leg exercise" },
-              { name: "Deadlift", description: "Full body exercise" },
-            ],
-          },
-        ],
+        name: "Bench Press",
+        description: "Chest exercise",
+        sets: 10,
+        reps: 10,
+        holdTime: 10,
+        side: "Left",
+        dumbbell: 10,
       },
       {
-        name: "Cardio",
-        subcategories: [
-          {
-            name: "Running",
-            exercises: [
-              { name: "Sprints", description: "Short distance running" },
-              { name: "Marathon", description: "Long distance running" },
-            ],
-          },
-          {
-            name: "Cycling",
-            exercises: [
-              { name: "Road Cycling", description: "Outdoor cycling" },
-              { name: "Stationary Bike", description: "Indoor cycling" },
-            ],
-          },
-        ],
+        name: "Pull Up",
+        description: "Back exercise",
+        sets: 8,
+        reps: 12,
+        holdTime: 5,
+        side: "Right",
+        dumbbell: 0,
+      },
+      {
+        name: "Squat",
+        description: "Leg exercise",
+        sets: 12,
+        reps: 10,
+        holdTime: 5,
+        side: "Left",
+        dumbbell: 20,
+      },
+      {
+        name: "Deadlift",
+        description: "Full body exercise",
+        sets: 10,
+        reps: 8,
+        holdTime: 0,
+        side: "Right",
+        dumbbell: 30,
       },
     ],
   };
@@ -109,12 +107,10 @@ app.delete("/api/categories/:id", async (req, res) => {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    res
-      .status(200)
-      .json({
-        message: "Category deleted successfully",
-        id: deletedCategory._id,
-      });
+    res.status(200).json({
+      message: "Category deleted successfully",
+      id: deletedCategory._id,
+    });
   } catch (error) {
     console.error("Error deleting category:", error);
     res.status(500).json({ message: "Failed to delete category", error });
@@ -123,5 +119,5 @@ app.delete("/api/categories/:id", async (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  //   await seedData();
+  // await seedData();
 });
