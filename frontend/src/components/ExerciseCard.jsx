@@ -3,9 +3,28 @@ import { useState } from "react";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { LiaDumbbellSolid } from "react-icons/lia";
 import { IoDuplicateSharp } from "react-icons/io5";
+import { GrDrag } from "react-icons/gr";
+import { Reorder } from "framer-motion";
 
-const ExerciseCard = () => {
+const ExerciseCard = ({ category, setCategory }) => {
   const [activeButton, setActiveButton] = useState(null);
+
+  const { name } = category;
+
+  const addDuplicate = async (cat) => {
+    const response = await fetch(
+      "https://rootally-ai.vercel.app/api/duplicate-category",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(cat),
+      }
+    );
+    const json = await response.json();
+    setCategory((prev) => [...prev, json]);
+  };
 
   const handleClick = (button) => {
     setActiveButton(button);
@@ -14,11 +33,18 @@ const ExerciseCard = () => {
   const handleQuantityMinus = (item) => {};
 
   const handleQuantityPlus = (item) => {};
+
+  const handleDuplicate = (cat) => {
+    addDuplicate(cat);
+  };
+
   return (
-    <div>
-      <div className="bg-[#F2F5FA]  p-3 m-3 rounded-lg">
+    <div className="flex items-center justify-center">
+      <GrDrag className="" />
+
+      <div className="bg-[#F2F5FA] w-full  p-3 m-3 rounded-lg">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl text-gray-400 font-semibold">Knee Bends</h2>
+          <h2 className="text-xl text-gray-400 font-semibold">{name}</h2>
           <div className="flex items-center gap-3">
             <div className="p-2 bg-white border border-black inline rounded-md">
               <button
@@ -45,7 +71,10 @@ const ExerciseCard = () => {
               </button>
             </div>
             <div>
-              <button className="bg-[#8EA7E3] flex items-center gap-2 text-white py-1 rounded-2xl px-2">
+              <button
+                onClick={() => handleDuplicate(category)}
+                className="bg-[#8EA7E3] flex items-center gap-2 text-white py-1 rounded-2xl px-2"
+              >
                 <IoDuplicateSharp /> Duplicate
               </button>
             </div>
