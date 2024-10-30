@@ -1,0 +1,42 @@
+{
+  "categories": [
+    {
+      "name": "Strength",
+      "subcategories": [
+        {
+          "name": "Upper Body",
+          "exercises": [
+            { "name": "Bench Press", "description": "Chest exercise" },
+            { "name": "Pull Up", "description": "Back exercise" }
+          ]
+        },
+        {
+          "name": "Lower Body",
+          "exercises": [
+            { "name": "Squat", "description": "Leg exercise" },
+            { "name": "Deadlift", "description": "Full body exercise" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cardio",
+      "subcategories": [
+        {
+          "name": "Running",
+          "exercises": [
+            { "name": "Sprints", "description": "Short distance running" },
+            { "name": "Marathon", "description": "Long distance running" }
+          ]
+        },
+        {
+          "name": "Cycling",
+          "exercises": [
+            { "name": "Road Cycling", "description": "Outdoor cycling" },
+            { "name": "Stationary Bike", "description": "Indoor cycling" }
+          ]
+        }
+      ]
+    }
+  ]
+}
