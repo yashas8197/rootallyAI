@@ -117,6 +117,34 @@ app.delete("/api/categories/:id", async (req, res) => {
   }
 });
 
+const handleUpdate = async (id, updateData) => {
+  try {
+    const updatedExercise = await Category.findByIdAndUpdate(id, updateData);
+
+    if (!updatedExercise) {
+      throw new Error("Exercise not found");
+    }
+
+    return updatedExercise;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+app.post("/api/exercises/:id", async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedExercise = await handleUpdate(id, updateData);
+    res.status(200).json(updatedExercise);
+  } catch (error) {
+    res.status(error.message === "Exercise not found" ? 404 : 400).json({
+      message: error.message,
+    });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
   // await seedData();
