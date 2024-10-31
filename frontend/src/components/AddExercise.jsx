@@ -79,10 +79,12 @@ const AddExercise = ({ setCategory }) => {
       <DialogTrigger className="p-5 m-5 bg-[#8CAAE7] rounded-lg">
         Add Exercise
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-md mx-auto p-4 sm:p-6">
         <DialogHeader>
-          <DialogTitle>Add a New Exercise</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">
+            Add a New Exercise
+          </DialogTitle>
+          <DialogDescription className="text-sm sm:text-base">
             Fill out the form below to add a new exercise to your program.
           </DialogDescription>
         </DialogHeader>
@@ -116,7 +118,7 @@ const AddExercise = ({ setCategory }) => {
               Side
             </label>
             <div className="flex space-x-4 mt-1">
-              <label>
+              <label className="flex items-center">
                 <input
                   type="radio"
                   value="Left"
@@ -127,7 +129,7 @@ const AddExercise = ({ setCategory }) => {
                 />
                 Left
               </label>
-              <label>
+              <label className="flex items-center">
                 <input
                   type="radio"
                   value="Right"
@@ -140,7 +142,7 @@ const AddExercise = ({ setCategory }) => {
               </label>
             </div>
           </div>
-          <div className="flex justify-between">
+          <div className="flex flex-wrap justify-between">
             <div
               onClick={() =>
                 handleChange(
@@ -148,7 +150,7 @@ const AddExercise = ({ setCategory }) => {
                   !exerciseData.isDumbbellChecked
                 )
               }
-              className={`cursor-pointer ${
+              className={`cursor-pointer mb-2 sm:mb-0 ${
                 exerciseData.isDumbbellChecked ? "text-blue-500" : ""
               }`}
             >
@@ -162,7 +164,7 @@ const AddExercise = ({ setCategory }) => {
                   !exerciseData.isHoldTimeChecked
                 )
               }
-              className={`cursor-pointer ${
+              className={`cursor-pointer mb-2 sm:mb-0 ${
                 exerciseData.isHoldTimeChecked ? "text-blue-500" : ""
               }`}
             >
@@ -173,7 +175,7 @@ const AddExercise = ({ setCategory }) => {
               onClick={() =>
                 handleChange("isRepsChecked", !exerciseData.isRepsChecked)
               }
-              className={`cursor-pointer ${
+              className={`cursor-pointer mb-2 sm:mb-0 ${
                 exerciseData.isRepsChecked ? "text-blue-500" : ""
               }`}
             >
@@ -184,7 +186,7 @@ const AddExercise = ({ setCategory }) => {
               onClick={() =>
                 handleChange("isSetsChecked", !exerciseData.isSetsChecked)
               }
-              className={`cursor-pointer ${
+              className={`cursor-pointer mb-2 sm:mb-0 ${
                 exerciseData.isSetsChecked ? "text-blue-500" : ""
               }`}
             >

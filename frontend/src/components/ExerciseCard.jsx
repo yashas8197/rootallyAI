@@ -15,14 +15,16 @@ const ExerciseCard = ({ category, setCategory, shouldDisableDuplicate }) => {
 
   return (
     <div className="bg-[#F2F5FA] w-full p-3 m-3 rounded-lg">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl text-gray-400 font-semibold">{category.name}</h2>
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-white border border-black inline rounded-md">
+      <div className="flex flex-col sm:flex-row justify-between items-center">
+        <h2 className="text-lg sm:text-xl text-gray-400 font-semibold">
+          {category.name}
+        </h2>
+        <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
+          <div className="p-2 bg-white border border-black inline rounded-md flex flex-wrap gap-1">
             <button
               onClick={() => handleUpdateSide("Left")}
               disabled={shouldDisableDuplicate}
-              className={`px-5 py-0.5 rounded-md ${
+              className={`px-4 py-1 rounded-md ${
                 exercises.side === "Left"
                   ? "bg-[#8CAAE7] text-white"
                   : "bg-white text-gray-400"
@@ -35,7 +37,7 @@ const ExerciseCard = ({ category, setCategory, shouldDisableDuplicate }) => {
             <button
               onClick={() => handleUpdateSide("Right")}
               disabled={shouldDisableDuplicate}
-              className={`px-5 py-0.5 rounded-md ${
+              className={`px-4 py-1 rounded-md ${
                 exercises.side === "Right"
                   ? "bg-[#8CAAE7] text-white"
                   : "bg-white text-gray-400"
@@ -64,13 +66,13 @@ const ExerciseCard = ({ category, setCategory, shouldDisableDuplicate }) => {
         </div>
       </div>
 
-      <div className="flex justify-between mt-5">
+      <div className="flex flex-col sm:flex-row justify-between mt-5">
         {["sets", "reps", "holdTime", "dumbbell"].map(
           (field) =>
             exercises[field] > 0 && (
               <div
                 key={field}
-                className="flex items-center bg-white p-2 rounded shadow-sm"
+                className="flex items-center bg-white p-2 rounded shadow-sm w-full sm:w-auto mb-2 sm:mb-0"
               >
                 <span className="text-lg mr-2">
                   {field === "dumbbell" ? (

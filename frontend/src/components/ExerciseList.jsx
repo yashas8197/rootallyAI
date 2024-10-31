@@ -64,21 +64,23 @@ const ExerciseList = () => {
   };
 
   return (
-    <div className="border border-gray-400 w-3/4 mx-auto my-5 p-5 rounded-lg">
-      <div className="flex justify-between">
-        <h1 className="text-[#8CAAE7] font-bold text-xl">Exercise Programme</h1>
+    <div className="border border-gray-400 w-full sm:w-3/4 mx-auto my-5 p-4 sm:p-5 rounded-lg">
+      <div className="flex justify-between items-center">
+        <h1 className="text-[#8CAAE7] font-bold text-lg sm:text-xl">
+          Exercise Programme
+        </h1>
         <Button onClick={clearAllExercises} variant="destructive">
           Clear All
         </Button>
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center h-[500px]">
-          <p className="text-2xl text-[#8CAAE7]">Loading...</p>
+        <div className="flex justify-center items-center h-[300px] sm:h-[500px]">
+          <p className="text-xl sm:text-2xl text-[#8CAAE7]">Loading...</p>
         </div>
       ) : (
-        <section ref={scrollContainerRef}>
-          <ScrollArea className="h-[500px]">
+        <section ref={scrollContainerRef} className="mt-4">
+          <ScrollArea className="h-[300px] sm:h-[500px]">
             <Reorder.Group axis="y" values={category} onReorder={setCategory}>
               {category.map((cat) => (
                 <Reorder.Item key={cat._id} value={cat} onDrag={scrollOnDrag}>
@@ -94,13 +96,9 @@ const ExerciseList = () => {
               ))}
             </Reorder.Group>
           </ScrollArea>
-          <div className="flex justify-between items-center">
-            <div>
-              <AddExercise setCategory={setCategory} />
-            </div>
-            <div>
-              <CreateCombo setCategory={setCategory} category={category} />
-            </div>
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
+            <AddExercise setCategory={setCategory} />
+            <CreateCombo setCategory={setCategory} category={category} />
           </div>
         </section>
       )}

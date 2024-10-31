@@ -44,7 +44,7 @@ const CreateCombo = ({ category, setCategory }) => {
       <DialogTrigger className="p-5 m-5 bg-[#8CAAE7] rounded-lg">
         Create Combo
       </DialogTrigger>
-      <DialogContent className="bg-white rounded-lg p-6">
+      <DialogContent className="bg-white rounded-lg p-6 max-h-[90vh] overflow-y-auto">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle className="text-[#8CAAE7] text-lg font-semibold">
@@ -93,13 +93,13 @@ const CreateCombo = ({ category, setCategory }) => {
                   key={index}
                   onClick={() => toggleDay(day)}
                   className={`w-10 h-10 rounded-full font-semibold flex items-center justify-center
-                    ${
-                      selectedDays.includes(day)
-                        ? "bg-[#8CAAE7] text-white"
-                        : "bg-[#F2F1F6] text-[#8CAAE7]"
-                    }
-                    transition-colors duration-200 ease-in-out
-                  `}
+                ${
+                  selectedDays.includes(day)
+                    ? "bg-[#8CAAE7] text-white"
+                    : "bg-[#F2F1F6] text-[#8CAAE7]"
+                }
+                transition-colors duration-200 ease-in-out
+              `}
                 >
                   {day}
                 </button>
