@@ -176,6 +176,20 @@ app.post("/api/exercises", async (req, res) => {
   }
 });
 
+app.post("/api/clear-exercises", async (req, res) => {
+  try {
+    const result = await Category.deleteMany({});
+
+    res.status(200).json({
+      message: "All exercises cleared successfully",
+      deletedCount: result.deletedCount,
+    });
+  } catch (error) {
+    console.error("Error clearing exercises:", error);
+    res.status(500).json({ message: "Failed to clear exercises", error });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
   // await seedData();
