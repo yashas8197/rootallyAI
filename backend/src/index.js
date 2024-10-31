@@ -176,7 +176,7 @@ app.post("/api/exercises", async (req, res) => {
   }
 });
 
-app.post("/api/clear-exercises", async (req, res) => {
+app.delete("/api/clear-exercises", async (req, res) => {
   try {
     const result = await Category.deleteMany({});
 
