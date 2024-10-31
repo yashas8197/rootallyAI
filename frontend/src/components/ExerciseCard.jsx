@@ -20,7 +20,7 @@ const ExerciseCard = ({ category, setCategory, shouldDisableDuplicate }) => {
           {category.name}
         </h2>
         <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
-          <div className="p-2 bg-white border border-black inline rounded-md flex flex-wrap gap-1">
+          <div className="p-2 bg-white border border-black rounded-md flex flex-wrap gap-1">
             <button
               onClick={() => handleUpdateSide("Left")}
               disabled={shouldDisableDuplicate}

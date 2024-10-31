@@ -52,3 +52,11 @@ export const addDuplicateApi = async (cat) => {
 
   return response.json();
 };
+
+export const clearExerciseApi = async (cat) => {
+  const response = await fetch(`${BASE_API_URL}/api/clear-exercises`, {
+    method: "DELETE",
+  });
+
+  return response.json();
+};

@@ -7,6 +7,7 @@ import { BASE_API_URL } from "@/utils/constants";
 import CreateCombo from "./CreateCombo";
 import { Button } from "./ui/button";
 import { GrDrag } from "react-icons/gr";
+import { clearExerciseApi } from "@/utils/useExerciseApi";
 
 const SCROLL_OFFSET = 10;
 const SCROLL_SPEED = 10;
@@ -61,6 +62,7 @@ const ExerciseList = () => {
 
   const clearAllExercises = () => {
     setCategory([]);
+    clearExerciseApi();
   };
 
   return (
