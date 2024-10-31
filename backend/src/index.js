@@ -86,9 +86,19 @@ app.post("/api/duplicate-category", async (req, res) => {
   try {
     const categoryData = req.body;
 
+    const dataToDuplicate = {
+      name: categoryData.name,
+      description: categoryData.description,
+      side: `${categoryData.side === "Left" ? "Right" : "Left"}`,
+      sets: categoryData.sets,
+      reps: categoryData.reps,
+      holdTime: categoryData.holdTime,
+      dumbbell: categoryData.dumbbell,
+    };
+
     delete categoryData._id;
 
-    const duplicatedCategory = new Category(categoryData);
+    const duplicatedCategory = new Category(dataToDuplicate);
     await duplicatedCategory.save();
 
     res.status(201).json(duplicatedCategory);
