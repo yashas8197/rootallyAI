@@ -14,12 +14,10 @@ const categorySchema = new mongoose.Schema(
     },
     sets: {
       type: Number,
-      required: true,
       min: 1,
     },
     reps: {
       type: Number,
-      required: true,
       min: 1,
     },
     holdTime: {
