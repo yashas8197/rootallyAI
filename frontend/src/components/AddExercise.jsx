@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { LiaDumbbellSolid } from "react-icons/lia";
 import { FaHourglassHalf, FaListOl, FaCheck } from "react-icons/fa";
-import postExerciseApi from "@/utils/postExerciseApi";
+import { postExerciseApi } from "@/utils/useExerciseApi";
 
 const AddExercise = ({ setCategory }) => {
   const [exerciseData, setExerciseData] = useState({
