@@ -201,6 +201,26 @@ app.get("/api/combos", async (req, res) => {
   }
 });
 
+app.delete("/api/combo/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedCombo = await Combo.findByIdAndDelete(id);
+
+    if (!deletedCombo) {
+      return res.status(404).json({ message: "Combo not found" });
+    }
+
+    res.status(200).json({
+      message: "Combo deleted successfully",
+      id: deletedCombo._id,
+    });
+  } catch (error) {
+    console.error("Error deleting combo:", error);
+    res.status(500).json({ message: "Failed to delete combo", error });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`Server running on http://localhost:${PORT}`);
   // await seedData();
