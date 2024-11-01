@@ -161,8 +161,8 @@ app.delete("/api/clear-exercises", async (req, res) => {
 const addCombo = async (comboData) => {
   const { comboName, note, DayOfWeek, exercises } = comboData;
 
-  const formattedExercises = exercises.map(
-    (id) => new mongoose.Types.ObjectId(id)
+  const formattedExercises = exercises.map((id) =>
+    mongoose.Types.ObjectId.isValid(id) ? new mongoose.Types.ObjectId(id) : id
   );
 
   const newComboData = {
@@ -172,7 +172,8 @@ const addCombo = async (comboData) => {
     exercises: formattedExercises,
   };
 
-  return await Combo.create(newComboData);
+  const newCombo = await Combo.create(newComboData);
+  return await Combo.findById(newCombo._id).populate("exercises");
 };
 
 app.post("/api/combo", async (req, res) => {
