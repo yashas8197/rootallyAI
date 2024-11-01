@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Category = require("./models/category.model");
+const Combo = require("./models/combo.model");
 const app = express();
 const PORT = process.env.PORT || 5000;
 require("dotenv").config();
@@ -25,51 +26,18 @@ mongoose
 
 // Seed data
 const seedData = async () => {
-  await Category.deleteMany({});
+  await Combo.deleteMany({});
 
-  const data = {
-    categories: [
-      {
-        name: "Bench Press",
-        description: "Chest exercise",
-        sets: 10,
-        reps: 10,
-        holdTime: 10,
-        side: "Left",
-        dumbbell: 10,
-      },
-      {
-        name: "Pull Up",
-        description: "Back exercise",
-        sets: 8,
-        reps: 12,
-        holdTime: 5,
-        side: "Right",
-        dumbbell: 0,
-      },
-      {
-        name: "Squat",
-        description: "Leg exercise",
-        sets: 12,
-        reps: 10,
-        holdTime: 5,
-        side: "Left",
-        dumbbell: 20,
-      },
-      {
-        name: "Deadlift",
-        description: "Full body exercise",
-        sets: 10,
-        reps: 8,
-        holdTime: 0,
-        side: "Right",
-        dumbbell: 30,
-      },
-    ],
+  const comboData = {
+    comboName: "Full Body Workout",
+    note: "Best for overall fitness",
+    DayOfWeek: ["M", "W", "F"],
+    exercises: ["6723cf64e421c43a5cf20896", "6723cf69e421c43a5cf20898"],
   };
 
-  await Category.insertMany(data.categories);
-  console.log("Data seeded successfully!");
+  await Combo.create(comboData);
+
+  console.log("Combo data seeded successfully!");
 };
 
 app.get("/api/categories", async (req, res) => {
@@ -187,6 +155,49 @@ app.delete("/api/clear-exercises", async (req, res) => {
   } catch (error) {
     console.error("Error clearing exercises:", error);
     res.status(500).json({ message: "Failed to clear exercises", error });
+  }
+});
+
+const addCombo = async (comboData) => {
+  const { comboName, note, DayOfWeek, exercises } = comboData;
+
+  const formattedExercises = exercises.map(
+    (id) => new mongoose.Types.ObjectId(id)
+  );
+
+  const newComboData = {
+    comboName,
+    note,
+    DayOfWeek,
+    exercises: formattedExercises,
+  };
+
+  return await Combo.create(newComboData);
+};
+
+app.post("/api/combo", async (req, res) => {
+  try {
+    const newCombo = await addCombo(req.body);
+    res.status(201).json({
+      message: "Combo created successfully",
+      data: newCombo,
+    });
+  } catch (error) {
+    console.error("Error creating combo:", error);
+    res.status(500).json({ message: "Failed to create combo", error });
+  }
+});
+
+app.get("/api/combos", async (req, res) => {
+  try {
+    const combos = await Combo.find().populate("exercises");
+    res.status(200).json({
+      message: "Combos retrieved successfully",
+      data: combos,
+    });
+  } catch (error) {
+    console.error("Error fetching combos:", error);
+    res.status(500).json({ message: "Failed to fetch combos", error });
   }
 });
 
