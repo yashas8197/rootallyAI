@@ -7,7 +7,7 @@ import { BASE_API_URL } from "@/utils/constants";
 import CreateCombo from "./CreateCombo";
 import { Button } from "./ui/button";
 import { GrDrag } from "react-icons/gr";
-import { clearExerciseApi } from "@/utils/useExerciseApi";
+import { getAllCombosApi } from "@/utils/useExerciseApi";
 
 const SCROLL_OFFSET = 10;
 const SCROLL_SPEED = 10;
@@ -65,12 +65,23 @@ const ExerciseList = () => {
     clearExerciseApi();
   };
 
+  const showComboList = async () => {
+    const combos = await getAllCombosApi();
+    setCategory((prev) => [...prev, ...combos.data]);
+  };
+
   return (
     <div className="border border-gray-400 w-full sm:w-3/4 mx-auto my-5 p-4 sm:p-5 rounded-lg">
       <div className="flex justify-between items-center">
         <h1 className="text-[#8CAAE7] font-bold text-lg sm:text-xl">
           Exercise Programme
         </h1>
+        <button
+          onClick={showComboList}
+          className="bg-[#8EA7E3] px-2 py-1 rounded-lg text-white font-semibold"
+        >
+          Show Combo List
+        </button>
         <Button onClick={clearAllExercises} variant="destructive">
           Clear All
         </Button>

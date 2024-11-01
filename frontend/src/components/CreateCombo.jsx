@@ -7,8 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { postComboApi } from "@/utils/useExerciseApi";
 
 const CreateCombo = ({ category, setCategory }) => {
+  const [comboName, setComboName] = useState("");
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
   const [note, setNote] = useState("");
@@ -32,11 +34,23 @@ const CreateCombo = ({ category, setCategory }) => {
     setSelectedExercises(selected);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Selected Exercises:", selectedExercises);
-    console.log("Selected Days:", selectedDays);
-    console.log("note", note);
+
+    const dataToAdd = {
+      comboName,
+      exercises: selectedExercises,
+      DayOfWeek: selectedDays,
+      note,
+    };
+    const combo = await postComboApi(dataToAdd);
+
+    setCategory((prev) => [...prev, combo.data]);
+
+    setSelectedDays([]);
+    setSelectedExercises([]);
+    setComboName("");
+    setNote("");
   };
 
   return (
@@ -58,7 +72,22 @@ const CreateCombo = ({ category, setCategory }) => {
 
           <div className="mt-4 mb-4">
             <label className="text-[#8CAAE7] font-semibold mb-2 block">
-              Select Exercises
+              Combo Name:
+            </label>
+            <input
+              type="text"
+              className="w-full p-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8CAAE7]"
+              value={comboName}
+              onChange={(e) => setComboName(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-4 mb-4">
+            <label className="text-[#8CAAE7] font-semibold mb-2 block">
+              Select Exercises{" "}
+              <span className="text-gray-400 text-xs">
+                (ctrl + select for multiple options)
+              </span>
             </label>
             <select
               multiple
@@ -66,11 +95,14 @@ const CreateCombo = ({ category, setCategory }) => {
               onChange={handleExerciseSelect}
               className="w-full p-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8CAAE7]"
             >
-              {category.map((cat) => (
-                <option key={cat._id} value={cat.name}>
-                  {cat.name}
-                </option>
-              ))}
+              {category.map(
+                (cat) =>
+                  cat.name && (
+                    <option key={cat._id} value={cat._id}>
+                      {`${cat.name} ${cat.side}`}
+                    </option>
+                  )
+              )}
             </select>
           </div>
 

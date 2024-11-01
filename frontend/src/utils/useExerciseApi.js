@@ -60,3 +60,45 @@ export const clearExerciseApi = async (cat) => {
 
   return response.json();
 };
+
+export const getAllCombosApi = async () => {
+  try {
+    const response = await fetch(`${BASE_API_URL}/api/combos`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch combos: ${response.status}`);
+    }
+
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const postComboApi = async (comboData) => {
+  try {
+    const response = await fetch(`${BASE_API_URL}/api/combo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comboData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
