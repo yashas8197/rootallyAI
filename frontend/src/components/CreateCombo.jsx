@@ -14,6 +14,7 @@ const CreateCombo = ({ category, setCategory }) => {
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
   const [note, setNote] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDay = (day) => {
     setSelectedDays((prevSelectedDays) =>
@@ -36,6 +37,7 @@ const CreateCombo = ({ category, setCategory }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsOpen(false);
 
     const dataToAdd = {
       comboName,
@@ -44,6 +46,7 @@ const CreateCombo = ({ category, setCategory }) => {
       note,
     };
     const combo = await postComboApi(dataToAdd);
+    setCategory((prev) => [...prev, combo.data]);
 
     setSelectedDays([]);
     setSelectedExercises([]);
@@ -52,8 +55,11 @@ const CreateCombo = ({ category, setCategory }) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger className="p-5 m-5 bg-[#8CAAE7] rounded-lg">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger
+        onClick={() => setIsOpen(true)}
+        className="p-5 m-5 bg-[#8CAAE7] rounded-lg"
+      >
         Create Combo
       </DialogTrigger>
       <DialogContent className="bg-white rounded-lg p-6 max-h-[90vh] overflow-y-auto">

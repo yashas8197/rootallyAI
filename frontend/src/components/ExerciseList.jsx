@@ -91,7 +91,7 @@ const ExerciseList = () => {
           onClick={showComboList}
           className="bg-[#8EA7E3] px-2 py-1 rounded-lg text-white font-semibold"
         >
-          Show Combo List
+          Show All Combos
         </button>
         <Button onClick={clearAllExercises} variant="destructive">
           Clear All

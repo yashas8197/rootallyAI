@@ -21,9 +21,11 @@ const AddExercise = ({ setCategory }) => {
     isRepsChecked: false,
     isSetsChecked: false,
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsOpen(false);
 
     postExercise();
   };
@@ -75,7 +77,7 @@ const AddExercise = ({ setCategory }) => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger className="p-5 m-5 bg-[#8CAAE7] rounded-lg">
         Add Exercise
       </DialogTrigger>
