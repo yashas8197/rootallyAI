@@ -66,8 +66,19 @@ const ExerciseList = () => {
   };
 
   const showComboList = async () => {
-    const combos = await getAllCombosApi();
-    setCategory((prev) => [...prev, ...combos.data]);
+    try {
+      const combos = await getAllCombosApi();
+
+      const existingComboIds = new Set(category.map((cat) => cat._id));
+
+      const newCombos = combos.data.filter(
+        (combo) => !existingComboIds.has(combo._id)
+      );
+
+      setCategory((prev) => [...prev, ...newCombos]);
+    } catch (error) {
+      console.error("Failed to fetch combo list:", error);
+    }
   };
 
   return (

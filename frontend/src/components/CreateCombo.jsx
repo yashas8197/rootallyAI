@@ -45,8 +45,6 @@ const CreateCombo = ({ category, setCategory }) => {
     };
     const combo = await postComboApi(dataToAdd);
 
-    setCategory((prev) => [...prev, combo.data]);
-
     setSelectedDays([]);
     setSelectedExercises([]);
     setComboName("");
